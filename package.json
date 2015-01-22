@@ -1,0 +1,16 @@
+{
+"name": "Project X",
+"description": "Description of my app.",
+"version": "1.0",
+"main": "index.html",
+"window": {
+	"frame": false,
+	"toolbar": false,
+	"width": 750,
+	"height": 768,
+	"min_width": 750,
+    "min_height": 768,
+    "max_width": 750,
+    "max_height": 768
+	}
+}
