@@ -8,10 +8,36 @@
          url('../fonts/robot/recognition-webfont.svg#recognitionregular') format('svg');
     font-weight: normal;
     font-style: normal;
+}
+
+@font-face {
+    font-family: 'pirates';
+    src: url('../fonts/pirates/wantedpirates-webfont.eot');
+    src: url('../fonts/pirates/wantedpirates-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/pirates/wantedpirates-webfont.woff2') format('woff2'),
+         url('../fonts/pirates/wantedpirates-webfont.woff') format('woff'),
+         url('../fonts/pirates/wantedpirates-webfont.ttf') format('truetype'),
+         url('../fonts/pirates/wantedpirates-webfont.svg#wantedpiratesregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'hyperspace';
+    src: url('../fonts/hyperspace/hyperspace-webfont.eot');
+    src: url('../fonts/hyperspace/hyperspace-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/hyperspace/hyperspace-webfont.woff2') format('woff2'),
+         url('../fonts/hyperspace/hyperspace-webfont.woff') format('woff'),
+         url('../fonts/hyperspace/hyperspace-webfont.ttf') format('truetype'),
+         url('../fonts/hyperspace/hyperspace-webfont.svg#hyperspaceregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 
 }
 
 body{
+	-moz-text-decoration-color: transparent;
+    text-decoration-color: transparent;
 	background: #000;
 }
 
@@ -37,28 +63,11 @@ body{
   	-webkit-app-region: drag;
   	color : #FFF;
   	padding : 5px 0 0 10px;
-  	font-family: recognitionregular;
-  	font-size: 15pt;
+  	font-family: hyperspace;
+  	font-size: 12pt;
+  	font-weight: bold;
   	border-bottom: #890E7C 1px solid;
   	border-top: #890E7C 1px solid;
-}
-
-.x{
-	position : fixed;
-	right : 0;
-	top : 0;
-	height : 35px;
-	width : 35px;
-	background : url('../img/close.jpg');
-	background-size: 100% 100%;
-	cursor: pointer;
-	-webkit-app-region: no-drag;
-	opacity: 0.2;
-}
-
-.x:hover{
-	background : url('../img/close-hover.jpg');
-	opacity: 0.5;
 }
 
 .menu{
@@ -76,13 +85,16 @@ body{
 }
 
 .menu h1{
-	font-family: recognitionregular;
-  	font-size: 54pt;
+	font-family: hyperspace;
+  	font-size: 37pt;
   	color : #FFF;
   	background: rgba(137, 14, 124, .5)
 }
 
 .menu button{
+	width : 270px;
+	display : block;
+	margin: 15px auto;
 	font-family: recognitionregular;
   	font-size: 25pt;
   	color : #FFF;
@@ -104,6 +116,14 @@ body{
 	margin-top: 150px;
 }
 
+.field{
+	position: fixed;
+	top : 0px;
+	left : 0px;
+	width : 750px;
+	height : 780px;
+}
+
 .ship{
 	position: fixed;
 	bottom : -100px;
@@ -112,4 +132,14 @@ body{
 	width : 75px;
 	height : 75px;
 	background: url(../img/ship.png);
+	z-index: 3;
+}
+
+.bullet{
+	z-index: 1;
+	position: fixed;
+	width : 3px;
+	height : 24px;
+	background : #22F;
+	border : #00F 3px solid;
 }

@@ -6,12 +6,18 @@ var process = {
 		gui.App.quit();
 	}
 }
+
+$.shuffle = function(o){
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+}
+
 //bg offset
 $.bgLeft = function(){
 	$(".background").animate({
 		margin : "-300px -980px",
 		opacity : 0.7
-	}, 50000, function(){
+	}, 37000, function(){
 		$.bgRight();
 	})
 }
@@ -20,7 +26,7 @@ $.bgRight = function(){
 	$(".background").animate({
 		margin : "-300px 0",
 		opacity : 1
-	}, 50000, function(){
+	}, 37000, function(){
 		$.bgLeft();
 	})
 }
@@ -29,10 +35,15 @@ $.prepare = function($on, $done){
 	setTimeout($done, 1200);
 	$.gameOn = !!$on;
 	if($on){
+		$(".field").click(function(){
+			$.craft.shoot();
+		})
 		$(".menu > h1").animate({
-			color : '#F55'
+			color : '#F00'
 		}, 850, function(){
-			$(".background").stop();
+			$('body').animate({
+				backgroundColor : '#F55'
+			}, 2500)
 			$('.menu').animate({
 				left : '-400px'
 			}, 1200)
@@ -44,20 +55,19 @@ $.prepare = function($on, $done){
 			})
 
 			$.craft = new ship();
-
-			$.craft.ready(function(){
-				$.craft.destroy();
-			})
 			
 		})
 		
 	} else {
+		$(".field").unbind('click');
+		$('body').animate({
+				backgroundColor : '#000'
+			}, 2500)
 		$(".menu > h1").css({color : '#FFF'})
 		$(".start").prop('disabled', false);
 		$('.field *').hide(1000, function(){
 			$(this).remove();
 		})
-		$.bgLeft();
 		$('.menu').animate({
 			left : '50%'
 		}, 1200);
@@ -77,7 +87,19 @@ $.prepare = function($on, $done){
 $(function(){
 	$.prepare(0)
 
-	$.bgLeft();
+	$.bgRight();
+
+	$(window).keyup(function(e){
+		switch(e.keyCode){
+			case 27: //esc
+				$.prepare(0);
+			break;
+
+			case 32: //space
+				$.craft.shoot();
+			break;
+		}
+	})
 
 	$(".titlebar").hover(function(){
 		$(this).animate({
@@ -94,13 +116,11 @@ $(function(){
 	$(".start").click(function(){
 		$(this).prop('disabled', true);
 		$.prepare(1, function(){
-			setTimeout(function(){
-				$.prepare(0);
-			}, 7000)
+
 		});
 	})
 
-	$('.x').click(function(){
+	$('.exit').click(function(){
 		process.exit();
 	})
 })
