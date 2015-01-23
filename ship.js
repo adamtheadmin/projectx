@@ -1,5 +1,8 @@
 
 function ship(){
+	this.gun = true;
+	this.rapid = true;
+	this.shots = 0;
 	var ship = this.ship = $("<div class='ship' />").appendTo($(".field"));
 	$('.field').mousemove(function(e){
 				ship.css({
@@ -11,7 +14,19 @@ function ship(){
 		}, 3500)
 
 	this.shoot = function(){
-		new bullet(this.ship.position(), true);
+		this.shots++;
+		if(this.shots > 150)
+			this.rapid = false;
+		var $stat = this.gun;
+		this.gun = !$stat;
+		var pos = this.ship.position(),
+		leftPos = pos.left - 17,
+		rightPos = pos.left + 7,
+		guns = this.rapid ? [leftPos, rightPos] : [$stat ? leftPos : rightPos];
+		$.each(guns, function(nuhXD, Lpos){
+			pos.left = Lpos;
+			new bullet(pos, true);
+		})
 	}
 
 	this.destroy = function($done){

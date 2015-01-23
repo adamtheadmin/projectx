@@ -38,25 +38,20 @@ $.prepare = function($on, $done){
 		$(".field").click(function(){
 			$.craft.shoot();
 		})
-		$(".menu > h1").animate({
-			color : '#F00'
-		}, 850, function(){
-			$('body').animate({
-				backgroundColor : '#F55'
-			}, 2500)
-			$('.menu').animate({
-				left : '-400px'
-			}, 1200)
-			$('.titlebar').animate({
-				top : '-150px'
-			}, 750)
-			$('body').css({
-				cursor : 'none'
-			})
-
-			$.craft = new ship();
-			
+		$('body').animate({
+			backgroundColor : '#F55'
+		}, 2500)
+		$('.menu').animate({
+			left : '-400px'
+		}, 1200)
+		$('.titlebar').animate({
+			top : '-150px'
+		}, 750)
+		$('body').css({
+			cursor : 'none'
 		})
+
+		$.craft = new ship();
 		
 	} else {
 		$(".field").unbind('click');
