@@ -125,7 +125,7 @@ body{
 }
 
 .ship{
-	position: fixed;
+	position: absolute;
 	bottom : -100px;
 	left : 50%;
 	margin-left: -37px;
@@ -139,7 +139,31 @@ body{
 	z-index: 1;
 	position: fixed;
 	width : 3px;
-	height : 24px;
+	height : 55px;
 	background : #22F;
 	border : #00F 3px solid;
+}
+
+.monster{
+	z-index: 3;
+}
+
+.healthbar{
+	z-index: 15;
+	background: rgba(100, 100, 100, .8);
+	position: fixed;
+	border : #000 1px solid;
+	border-radius: 7px;
+	height : 200px;
+	width : 33px;
+}
+
+.healthbar .red{
+	position: absolute;
+	bottom : 0px;
+	left : 0px;
+	width : 100%;
+	border-radius: 7px;
+	background: #1af429; /* Old browsers */
+	background: -webkit-linear-gradient(top, #1af429 0%,#e5de04 58%,#ff4949 90%); /* Chrome10+,Safari5.1+ */
 }

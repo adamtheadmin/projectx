@@ -15,18 +15,16 @@ $.shuffle = function(o){
 //bg offset
 $.bgLeft = function(){
 	$(".background").animate({
-		margin : "-300px -980px",
-		opacity : 0.7
-	}, 37000, function(){
+		margin : "-300px -980px"
+	}, 35000, function(){
 		$.bgRight();
 	})
 }
 
 $.bgRight = function(){
 	$(".background").animate({
-		margin : "-300px 0",
-		opacity : 1
-	}, 37000, function(){
+		margin : "-300px 0"
+	}, 35000, function(){
 		$.bgLeft();
 	})
 }
@@ -35,6 +33,9 @@ $.prepare = function($on, $done){
 	setTimeout($done, 1200);
 	$.gameOn = !!$on;
 	if($on){
+		setTimeout(function(){
+			$.wave1();
+		}, 2800);
 		$(".field").click(function(){
 			$.craft.shoot();
 		})
@@ -54,6 +55,7 @@ $.prepare = function($on, $done){
 		$.craft = new ship();
 		
 	} else {
+		$.destroyAllMonsters();
 		$(".field").unbind('click');
 		$('body').animate({
 				backgroundColor : '#000'
@@ -87,11 +89,16 @@ $(function(){
 	$(window).keyup(function(e){
 		switch(e.keyCode){
 			case 27: //esc
-				$.prepare(0);
+				if($.gameOn)
+					$.prepare(0);
 			break;
 
 			case 32: //space
 				$.craft.shoot();
+			break;
+
+			case 82: //R
+				$.craft.rapid = !$.craft.rapid;
 			break;
 		}
 	})

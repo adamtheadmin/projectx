@@ -3,8 +3,13 @@ function ship(){
 	this.gun = true;
 	this.rapid = true;
 	this.shots = 0;
+	this.health = 100;
+	this.healthbar = new healthbar(this.health);
 	var ship = this.ship = $("<div class='ship' />").appendTo($(".field"));
 	$('.field').mousemove(function(e){
+				$('.healthbar').css({
+					opacity : (1350 - e.clientX) / 1350 + (e.clientX < 350 ? 1 : 0)
+				}, 100)
 				ship.css({
 					left : e.clientX
 				})
@@ -13,15 +18,17 @@ function ship(){
 			bottom : 27
 		}, 3500)
 
+	setInterval(function(){
+		$.craft.healthbar.set($.rand(0, 100));
+	}, 3500)
+
 	this.shoot = function(){
 		this.shots++;
-		if(this.shots > 150)
-			this.rapid = false;
 		var $stat = this.gun;
 		this.gun = !$stat;
 		var pos = this.ship.position(),
-		leftPos = pos.left - 17,
-		rightPos = pos.left + 7,
+		leftPos = pos.left - 22,
+		rightPos = pos.left + 10,
 		guns = this.rapid ? [leftPos, rightPos] : [$stat ? leftPos : rightPos];
 		$.each(guns, function(nuhXD, Lpos){
 			pos.left = Lpos;
@@ -47,7 +54,7 @@ function bullet(pos, dir){
 		'#ff0000',
 		'#0000ff',
 		'#7920FF',
-		'#FD0987',
+		'#FD0987', 
 		'#FF3300'
 	];
 	var $bullet = $("<div class='bullet'/>").appendTo($('.field'));
@@ -59,7 +66,7 @@ function bullet(pos, dir){
 	} : {
 		top : 770,
 		background : $.shuffle($colors).shift()
-	}, 500, function(){
+	}, $.craft.rapid ? 350 : 350 + ($.craft.shots * 5), function(){
 		$(this).remove();
 	})
 }
