@@ -39,3 +39,25 @@ $.hook = function($name, $fct){
 		break;
 	}
 }
+
+$.banner = function($text, $callback){
+	return $('.banner').text($text).animate({
+		top : 0
+	}, 1000, function(){
+		setTimeout(function(){
+			$('.banner').animate({
+				top : -113
+			})
+			if(typeof $callback == 'function')
+				$callback();
+		}, 3500)
+	})
+}
+
+$.hook('gameStart', function(){
+	$.banner('GAME START');
+})
+
+$(function(){
+	$.banner('WELCOME TO PROJECT X')
+})
