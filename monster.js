@@ -18,9 +18,8 @@ $.getMonster = function(){
 }
 
 $.wave1 = function(){
-	new monster(1);
-	new monster(1);
-	new monster(1);
+	for(x = 0; x < 25; x++)
+		new monster(1);
 }
 
 $.allMonsters = [];
@@ -45,6 +44,8 @@ function monster(wave){
 	}).animate({
 		top : 5
 	}).appendTo($('.field')).addClass('monster');
+
+	this.img[0].monster = this;
 
 	this.shoot = function(){
 		this.shots++;

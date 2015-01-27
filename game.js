@@ -33,6 +33,7 @@ $.prepare = function($on, $done){
 	setTimeout($done, 1200);
 	$.gameOn = !!$on;
 	if($on){
+		$.hook('gameStart');
 		setTimeout(function(){
 			$.wave1();
 		}, 2800);
@@ -55,6 +56,7 @@ $.prepare = function($on, $done){
 		$.craft = new ship();
 		
 	} else {
+		$.hook('gameStop');
 		$.destroyAllMonsters();
 		$(".field").unbind('click');
 		$('body').animate({

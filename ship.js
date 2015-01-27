@@ -18,9 +18,11 @@ function ship(){
 			bottom : 27
 		}, 3500)
 
-	setInterval(function(){
-		$.craft.healthbar.set($.rand(0, 100));
-	}, 3500)
+	this.hit = function(){
+		this.health -= 5;
+		if(this.health < 0) this.health = 0;
+		this.healthbar.set(this.health);
+	}
 
 	this.shoot = function(){
 		this.shots++;
@@ -46,7 +48,11 @@ function ship(){
 }
 
 function bullet(pos, dir){
-	var $colors = [
+	this.enemy = !dir;
+	this.div = $("<div class='bullet'/>").appendTo($('.field'));
+	var $bullet = this.div,
+	thisBullet = this,
+	$colors = [
 	    '#ff00ff',
 		'#00ffff',
 		'#00ff00',
@@ -57,7 +63,12 @@ function bullet(pos, dir){
 		'#FD0987', 
 		'#FF3300'
 	];
-	var $bullet = $("<div class='bullet'/>").appendTo($('.field'));
+	this.destroy = function(){
+		this.div.remove();
+	}
+
+	this.div.addClass(this.enemy ? 'enemy' : 'friendly');
+
 	pos.background = $.shuffle($colors).shift();
 	pos.border = $.shuffle($colors).shift() + " 3px solid";
 	$bullet.css(pos).animate(dir ? {
@@ -66,7 +77,7 @@ function bullet(pos, dir){
 	} : {
 		top : 770,
 		background : $.shuffle($colors).shift()
-	}, $.craft.rapid ? 350 : 350 + ($.craft.shots * 5), function(){
+	}, this.enemy ? 350 : $.craft.rapid ? 350 : 550, function(){
 		$(this).remove();
 	})
 }
