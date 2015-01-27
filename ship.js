@@ -20,7 +20,7 @@ function ship(){
 
 	this.hit = function(){
 		this.health -= 5;
-		if(this.health < 0){
+		if(this.health <= 3){
 			$.banner('GAME OVER', function(){
 				$.prepare(0)
 			});

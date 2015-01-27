@@ -9,9 +9,9 @@ function healthbar(health){
 
 	this.red = $("<div />").addClass('red').appendTo(this.bar);
 	this.set = function($pct){
-		this.red.animate({
+		this.red.css({
 			height : $pct + '%'
-		}, 850);
+		});
 	}
 	this.set(health);
 }
