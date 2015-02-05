@@ -7,11 +7,6 @@ var process = {
 	}
 }
 
-$.shuffle = function(o){
-    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-    return o;
-}
-
 //bg offset
 $.bgLeft = function(){
 	$(".background").animate({
@@ -34,9 +29,9 @@ $.prepare = function($on, $done){
 	$.gameOn = !!$on;
 	if($on){
 		$.hook('gameStart');
-		setTimeout(function(){
-			$.wave1();
-		}, 2800);
+		$.waveInterval = setInterval(function(){
+			new wave();
+		}, 10000);
 		$(".field").click(function(){
 			$.craft.shoot();
 		})
@@ -57,6 +52,7 @@ $.prepare = function($on, $done){
 		
 	} else {
 		$.hook('gameStop');
+		clearTimeout($.waveInterval);
 		$.destroyAllMonsters();
 		$(".field").unbind('click');
 		$('body').animate({
@@ -84,6 +80,11 @@ $.prepare = function($on, $done){
 	}
 }
 $(function(){
+
+	// $.hook('gameStart', function(){
+	// 	$.banner('GAME START');
+	// })
+
 	$.prepare(0)
 
 	$.bgRight();

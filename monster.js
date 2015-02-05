@@ -17,18 +17,14 @@ $.getMonster = function(){
 	return "img/pokemon/" + $.shuffle($monsters).shift();
 }
 
-$.wave1 = function(){
-	for(x = 0; x < 25; x++)
-		new monster(1);
-}
-
-$.allMonsters = [];
 
 $.destroyAllMonsters = function(){
 	$.each($.allMonsters, function(nuhXD, $mstr){
 		$mstr.destroy();
 	})
 }
+
+$.allMonsters = [];
 
 function monster(wave){
 	$.allMonsters.push(this);
