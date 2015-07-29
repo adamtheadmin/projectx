@@ -29,11 +29,15 @@ $.prepare = function($on, $done){
 	$.gameOn = !!$on;
 	if($on){
 		$.hook('gameStart');
-		$.waveInterval = setInterval(function(){
-			new wave();
-		}, 10000);
+		new wave(1, function(){
+			new wave(2, function(){
+				$.banner("WARNING")
+			});
+		});
 		$(".field").click(function(){
 			$.craft.shoot();
+			setTimeout($.craft.shoot, 50)
+			setTimeout($.craft.shoot, 150)
 		})
 		$('body').animate({
 			backgroundColor : '#F55'

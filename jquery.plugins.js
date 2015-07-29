@@ -1,10 +1,16 @@
 (function(){
-	var waveCount = 1;
-	wave = function(){
-		var ct = (waveCount * 3 > 25 ? 25 : waveCount * 3);
-		for(x = 0; x < ct; x++)
-			new monster(1);
-		waveCount++;
+	wave = function(w, cbf){
+		cbf = cbf || function(){};
+		var series = [];
+		for(var x = 5 + w * 2;x; x--)
+			series.push(w);
+
+		async.eachSeries(series, function(num, next){
+			for(;num;num--){
+				var m = new monster(1);
+				m.onDeath.push(next);
+			}
+		}, cbf)
 	}
 })();
 

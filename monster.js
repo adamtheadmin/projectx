@@ -31,6 +31,7 @@ function monster(wave){
 	var thisMonster = this;
 	this.src = $.getMonster();
 	this.shots = 0;
+	this.onDeath = [];
 	this.img = $("<img />").attr({
 		src : this.src
 	}).css({
@@ -54,6 +55,8 @@ function monster(wave){
 	}, $.rand(500, 2500));
 
 	this.destroy = function(){
+		for(var x in thisMonster.onDeath)
+			thisMonster.onDeath[x]();
 		clearInterval(this.shootInterval);
 		this.img.hide();
 	}
