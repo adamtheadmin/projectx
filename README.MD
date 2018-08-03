@@ -5,6 +5,11 @@ This is a Space Shooter video game that I made a few years ago as an example. Th
   - Node Webkit
   - jQuery
 
+To Start:
+  - CD into the repo after cloning it
+  - Install NW.js with `sudo npm install -g nw`
+  - Run the application `nw`
+
 #### Licence
 Copyright 2013 Adam Fowler
 
